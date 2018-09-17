@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html ng-app="mapApp">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="ISO-8859-1">
+		
+		<title>Code Challenge</title>
+		<link rel="icon" href="img/map_icon.png"/>
+		
+		<!--Include Bootstrap-->	
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap2.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.default.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+		
+
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<link rel="stylesheet" href="css/map.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAqgZF9VqcM8fgtgwEMu2a_o32KY1GJrRI&language=en"></script>
+		<script type="text/javascript" src="js/map.js"></script>
+		
+	</head>
+	<body>
+		<div>
+			<div class="col-md-4 polaroid" ng-controller="MapController" style="background-color: #F2F2F2;">
+				<div class="col-md-12" style="padding:10px;">
+		
+					<!--Section Transportation Buttons-->
+					<label>Transportation</label>
+					<div class="col-md-12" style="padding:10px; text-align:center; background-color: #7B68EE;">
+						<div id="myDIV" ng-init="style={'background-color': 'white', 'color': '#7B68EE'}">
+							<button id="DRIVING" ng-style="style1" ng-click="style1=style; style2=null; hideShow= true" 
+									class="btn fa fa-automobile transportbtn" style="font-size:19px;"> &nbsp DRIVING</button>
+							<button id="TRANSIT" ng-style="style2" ng-click="style2=style; style1=null; hideShow= false" 
+									class="btn transportbtn fas fa-bus" style="font-size:19px; "> &nbsp TRANSIT</button>
+						</div>
+					</div>
+					
+					<!--Section for Start Dropdown-->
+					<div class="col-md-12" style="padding:10px;">
+						<label for="startpoint">Start</label><br>
+						<select name= "startpoint" style="width:100%; padding:5px;" ng-model="selectedStart" 
+								ng-options="item as item.label for item in names" required>
+							<option value="">-- choose start point --</option>
+						</select>
+					</div>
+					
+					<!--Section for Destination Dropdown-->
+					<div class="col-md-12" style="padding:10px;">
+						<label>Destination</label><br>
+						<select style="width:100%; padding:5px;" ng-model="selectedDesti" 
+								ng-options="item as item.label for item in desti">
+							<option value="">-- choose destination --</option>
+						</select>
+					</div>
+					
+					<!--Section for Breakpoints Dropdown-->
+					<div class="col-md-12" style="padding:10px;" ng-show="hideShow">
+						<label>Choose Break Points</label><br>
+						<select id = "breakpoints" style="width:100%; padding:5px;" ng-model="selectedBreakPoints" 
+								ng-options="item as item.label for item in breakpoints" multiple>
+							<option value="">-- press ctrl+click --</option>
+						</select>
+					</div>
+					
+					<!--Button for Search-->
+					<div class="col-md-12" style="text-align:center; width:100%; bottom:0px; padding: 40px;">
+						<button id="knowmore" ng-click="findRoute(selectedStart,selectedDesti,selectedBreakPoints)" 
+								class="btn btn-primary btn-sm" value="" style="border-radius:4px;" >Search</button>
+					</div>
+					
+					<!--Travel Directions Pannel Section-->
+					<div id="directions-panel" style="height:100px;" class="col-md-12 pre-scrollable"></div>	
+					
+				</div>
+			</div>
+			
+			<!--Google Maps section-->
+			<div class="col-md-8">
+				<div id="map"></div>
+			</div>
+		</div>
+	</body>
+</html>

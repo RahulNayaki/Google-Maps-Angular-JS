@@ -1,0 +1,27 @@
+#map{
+	 height:600px; 
+	 width:100%; 
+}
+
+body{
+		padding:10px;
+}
+	
+div.polaroid {
+		min-height: 600px;
+		overflow: hidden;	
+		background-color: white;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		margin-bottom: 25px;
+}
+			
+.active, .transportbtn:hover {
+		background-color: white;
+		color: #7B68EE;
+}
+			
+.transportbtn{
+		color:white; 
+		background-color: #7B68EE;
+		text-decoration: none;
+}
